@@ -1,6 +1,7 @@
 import {v1} from 'uuid';
 import {todolistsAPI, TodolistType} from '../api/todolists-api'
 import {Dispatch} from "redux";
+import {addTaskAC} from "./tasks-reducer";
 
 export type RemoveTodolistActionType = {
     type: 'REMOVE-TODOLIST',
@@ -111,6 +112,7 @@ export const addTodosThunkTC = (title:string) => {
     return (dispatch:Dispatch, getState:any) => {
         todolistsAPI.createTodolist(title).then(res => {
             // и диспатчить экшены (action) или другие санки (thunk)
+            // dispatch(addTaskAC)
             dispatch(addTodolistAC(title))
         })
     }
@@ -120,7 +122,9 @@ export const addTodosThunkTC = (title:string) => {
 // todo:1. Правильно ли говорить, что санка принимает те же параметры что и action creator.
 // todo:2. Tasks 500 ошибка
 
+
 export const deleteTodosThunkTC = (todoId:string) => {
+
     return (dispatch:Dispatch, getState:any) => {
         todolistsAPI.deleteTodolist(todoId)
             .then(res => {

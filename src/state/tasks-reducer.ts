@@ -156,8 +156,11 @@ export const createTasksTC = (todoId: string, title: string) => {
     // внутри санки можно делать побочные эффекты (запросы на сервер)
 }
 
-
-export const updateTaskTC = (todoId: string, taskId: string, status: TaskStatuses) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
+//updateTaskTC('todoId', 'taskId', {title: 'TITLE'})
+export const updateTaskTC = (todoId: string, taskId: string, status: TaskStatuses, updatingParams: {
+    status?: TaskStatuses
+    title?: string
+}) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
     const tasks = getState().tasks
     const task = tasks[todoId].find(t => t.id === taskId)
     if (task) {
